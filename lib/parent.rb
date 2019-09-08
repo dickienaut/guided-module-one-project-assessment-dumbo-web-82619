@@ -1,4 +1,5 @@
 class Parent < ActiveRecord::Base
-    Parent has_many Reviews
+    has_many :review
+    has_many :place, through: :review
 end
 

@@ -1,3 +1,4 @@
 class Review < ActiveRecord::Base
-     Review belongs_to Parent
+     belongs_to Parent
+     belongs_to Place
 end
