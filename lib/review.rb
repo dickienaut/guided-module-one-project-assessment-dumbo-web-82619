@@ -1,4 +1,4 @@
 class Review < ActiveRecord::Base
-     belongs_to Parent
-     belongs_to Place
+     belongs_to :parent
+     belongs_to :place
 end
