@@ -9,7 +9,11 @@ class Parent < ActiveRecord::Base
     def self.view_my_review
         find_review = Review.all.find_by(parent_id: $parent.id)
         system "clear"
+        if find_review == nil 
+            puts "There is no existing review for this user."
+        else
         puts "#{find_review.review}"
+        end
     end
 
     def self.new_review
@@ -37,6 +41,9 @@ class Parent < ActiveRecord::Base
         name = self.tty_prompt.ask("Welcome Back! What is your name?")
         $parent = Parent.find_by(name: name)  #finds name matching given user input in database
         #allow parent to update their profile and/or edit review
+        if $parent == nil
+            exit
+        else
         system "clear"
         self.tty_prompt.select("Would you like to update your profile name?") do |menu|
                 menu.choice "yes", -> {
@@ -60,7 +67,7 @@ class Parent < ActiveRecord::Base
                 menu.choice "no", -> { puts "Come Back and Find some Fun Later!" 
                 }
                 end
-        
+        end
     end
 
     def self.view_fun_activities

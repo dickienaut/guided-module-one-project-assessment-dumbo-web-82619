@@ -20,15 +20,18 @@ class Review < ActiveRecord::Base
 
      def self.review_delete
           review_deleter = Review.all.find_by(parent: $parent.id)
+          if review_deleter == nil 
+               puts "There are no reviews for this user."    
+          else
           system "clear"
           confirm = TTY::Prompt.new.select("Are you sure you want to delete your review?", ["Yes", "No"])
-        if confirm == "Yes"
-            review_deleter.destroy
-            puts "\nThat Review is Gone for Good! :) \n"
-        else
-          main_menu
-        end
-
+               if confirm == "Yes"
+                    review_deleter.destroy
+                    puts "\nThat Review is Gone for Good! :) \n"
+               else
+               exit 
+               end
+          end
      end
 
 end
